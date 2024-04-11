@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue formulaire héritée -->
+        <record id="view_sale_order_form_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir le formulaire de commande de vente -->
+        <record id="action_open_sale_order_form" model="ir.actions.act_window">
+            <field name="name">Open Sale Order Form</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Action pour afficher sous forme d'arbre -->
+        <record id="action_open_sale_order_tree" model="ir.actions.act_window">
+            <field name="name">Open Sale Order Tree</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,kanban</field>
+            <field name="target">current</field>
+        </record>
+
+       
+
+        <!-- Associer les actions au menu "Mouvements de stock" -->
+        <menuitem id="menu_mvt_stock" name="Mouvements de stock" parent="production.stocks"  action="action_open_sale_order_tree" />
+        <menuitem id="menu_open_mvt_form_menu" name="Ajouter au panier" parent="production.config" action="action_open_sale_order_form" sequence="11"/>
+    </data>
+</odoo>

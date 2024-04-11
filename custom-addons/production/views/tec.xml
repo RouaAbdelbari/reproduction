@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- Vue pour afficher le tableau de bord des techniciens en mode Kanban -->
+        <record id="new_module_team_kanban_view" model="ir.ui.view">
+            <field name="name">Tableau de bord des techniciens (Kanban)</field>
+            <field name="model">reproduction.technicien</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record">
+                                <field name="name"/>
+                                <field name="adresse"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir la vue de liste des techniciens -->
+        <record model="ir.actions.act_window" id="new_module_technicien_action_window">
+            <field name="name">Liste des techniciens</field>
+            <field name="res_model">reproduction.technicien</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!-- Ajoutez d'autres modes de vue si nécessaire -->
+        </record>
+
+        <!-- Ajout du menu pour ouvrir la liste des techniciens -->
+        <menuitem id="menu_open_tech_list" name="Liste des techniciens" parent="production.ressources" action="new_module_technicien_action_window" sequence="10"/>
+
+    </data>
+</odoo>

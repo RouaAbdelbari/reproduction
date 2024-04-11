@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Clinic"
+                  id="menu_clinic"
+                  web_icon="clinic_base,static/description/icon.png"
+                  sequence="1">
+
+            <menuitem name="Operations"
+                      id="menu_operations"
+                      sequence="1">
+
+                <menuitem name="Physician"
+                        id="menu_physician"
+                          action="clinic_base.clinic_physician_action_view"
+                          sequence="1"/>
+
+            </menuitem>
+
+
+            <menuitem name="Configuration"
+                      id="menu_config"
+                      sequence="3">
+
+                <menuitem name="Physician Degree"
+                        id="menu_physician_degree"
+                          action="clinic_base.clinic_physician_degree_action_view"
+                          sequence="1"/>
+
+                <menuitem name="Physician Specialty"
+                        id="menu_physician_specialty"
+                          action="clinic_base.clinic_physician_specialty_action_view"
+                          sequence="2"/>
+
+
+
+
+            </menuitem>
+
+        </menuitem>
+
+
+    </data>
+</odoo>

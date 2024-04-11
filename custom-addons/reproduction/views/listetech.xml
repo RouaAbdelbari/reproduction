@@ -1,0 +1,112 @@
+<odoo>
+    <data>
+        <!-- Vue formulaire pour un nouveau technicien -->
+        <record id="view_technicien_form" model="ir.ui.view">
+            <field name="name">Formulaire technicien</field>
+            <field name="model">reproduction.technicien</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Formulaire technicien">
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" status="draft" type="object" />
+                        
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="187" icon="fa-users" type="action">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">info</span>
+                                </div>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <div class="row">
+                            <div style="position: relative;">
+                                <field name="image" widget="image" class="oe_avatar" string="" style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; padding-bottom:10px"/>
+                            </div>
+                            <div style="position: relative;">
+                                <group class="oe_title">
+                                    <h1>
+                                        <field name="reference" readonly="1" style="padding-left: 10px;"/>
+                                    </h1>
+                                </group>
+                            </div>
+                            
+                            <group>
+                                <field name="name"/>
+                                <field name="technicien_id"/>
+                                <field name="adresse"/>
+                                <field name="telephone"/>
+                            </group>
+                            <group>
+                                <field name="date_embauche"/>
+                                <field name="specialite"/>
+                                <field name="active" invisible="1"/>
+                                <field name="email"/>
+                            </group>
+                            <notebook>
+                                <page name="information personnels" string="information personnels">
+                                    <group string="information personnels">
+                                        <field name="compte_bancaire_id"/> 
+                                        <field name="numero_secu_sociale"/>
+                                        <field name="numero_passeport"/>
+                                        <field name="etat_civil"/>
+                                        <field name="telephone_urgence"/>
+                                    </group>
+                                    <group string="Citoyenneté">
+                                        <field name="distance_travail_domicile"/>
+                                        <field name="lieu_naissance"/>
+                                        <field name="pays_naissance"/>
+                                    </group>
+                                    <group string="Contact privé">
+                                        <field name="telephone_urgence"/>
+                                    </group>
+                                </page>
+                                <page string="Competences" name="competences">
+                                    <group>
+                                        <field name="competences"/>      
+                                    </group>          
+                                </page>
+                                <page string="Autres infos" name="autres_infos">
+                                    <group>
+                                        <field name="note"/>      
+                                    </group>          
+                                </page>
+                               
+                            </notebook>
+                        </div>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                        <field name="activity_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_technicien_search" model="ir.ui.view">
+            <field name="name">reproduction.technicien.search</field>
+            <field name="model">reproduction.technicien</field>
+            <field name="arch" type="xml">
+                <search string="technicien">
+                    <field name="specialite"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="specialite" name="specialite" context="{'group_by':'specialite'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="specialite" string="Specialite" icon="fa-exchange"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+        <!-- Action pour ouvrir le formulaire d'un nouveau technicien -->
+        <record model="ir.actions.act_window" id="reproduction.menu_new_technicien">
+            <field name="res_model">reproduction.technicien</field>
+            <field name="name">technicien agricole</field>
+            <field name="view_mode">form</field>
+        </record>
+        <!-- Menu pour ajouter un nouveau technicien -->
+        <menuitem name="Ajouter un technicien" id="reproduction.menu_add_new_technicien" parent="reproduction.menu_technicien_agricole" action="reproduction.menu_new_technicien"/>
+    </data>
+</odoo>

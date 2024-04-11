@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="view_planification_production_list" model="ir.ui.view">
+            <field name="name">Planification de Production Tree View</field>
+            <field name="model">production_laitiere.planning</field>
+            <field name="arch" type="xml">
+                <tree string="Planifications de production">
+                    <field name="technicien_id"/>
+                    <field name="vache_id"/>
+                    <field name="date_planifiee"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_planification_production_calendar" model="ir.ui.view">
+            <field name="name">Calendrier de Production Calendar View</field>
+            <field name="model">production_laitiere.planning</field>
+            <field name="arch" type="xml">
+                <calendar string="Planifications de production" date_start="date_planifiee" date_stop="date_planifiee">
+                    <field name="technicien_id" filters="1"/>
+                    <field name="vache_id" filters="1" invisible="1"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record id="action_view_planification_production_list" model="ir.actions.act_window">
+            <field name="name">Liste des Planifications de Production</field>
+            <field name="res_model">production_laitiere.planning</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_id" ref="view_planification_production_list"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Aucune planification de production n'est disponible.
+                    <br/> Cliquez sur Créer pour en ajouter une.
+                </p>
+            </field>
+        </record>
+        
+        <menuitem id="menu_liste_planification" name="Planification de la production" parent="production_laitiere.gestion" action="action_view_planification_production_list"/>
+        
+    </data>
+</odoo>

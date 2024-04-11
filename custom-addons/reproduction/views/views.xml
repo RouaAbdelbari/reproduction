@@ -1,0 +1,98 @@
+<odoo>
+  <data>
+      <!-- Vue pour la liste de Reproduction -->
+      <record id="reproduction.menu_farm_animals_action_view" model="ir.ui.view">
+          <field name="name">Liste Reproduction</field>
+          <field name="model">reproduction.vache</field>
+          <field name="arch" type="xml">
+              <kanban>
+                  <templates>
+                      <t t-name="kanban-box">
+                          <div class="o_kanban_record" style="text-align: center; font-size: medium;">
+                              <div class="oe_kanban_global_click">
+                                  <img t-att-src="kanban_image('reproduction.vache', 'image', record.id.raw_value)" style="height: 100px; float: left; width: 40%;"/>
+                                  <div style="margin-left: 39%; margin-top: 5%; padding-left: 11px; width: 59%; text-align: center;">
+                                    <div>
+                                        <field name="reference"/>
+                                    </div>
+                                       <div>
+                                          <field name="poids"/>
+                                      </div>
+                                      <div>
+                                          <field name="race"/>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </t>
+                  </templates>
+              </kanban>
+          </field>
+      </record>
+      <record id="reproduction.menu_root_view" model="ir.ui.view">
+          <field name="name">Liste de Reproduction</field>
+          <field name="model">reproduction.vache</field>
+          <field name="arch" type="xml">
+              <tree editable="bottom">
+                  <field name="poids"/>
+                  <field name="race"/>
+                  <field name="couleur"/>
+                  <field name="sexe"/>
+                  <field name="date_naissance"/>
+                  <field name="image" widget="image" class="oe_avatar"/>
+              </tree>
+          </field>
+      </record>
+      <record id="reproduction.menu_vache_graph_view" model="ir.ui.view">
+        <field name="name">Graphique Reproduction</field>
+        <field name="model">reproduction.vache</field>
+        <field name="arch" type="xml">
+          <graph string="Répartition des vaches par race" type="bar">
+            <field name="race" type="row"/>
+          </graph>
+        </field>
+      </record>
+      <record id="reproduction.menu_vache_pivot_view" model="ir.ui.view">
+        <field name="name">Vue Pivot Reproduction</field>
+        <field name="model">reproduction.vache</field>
+        <field name="arch" type="xml">
+            <pivot string="Pivot Reproduction" >
+                <field name="race" type="row"/>
+                <field name="sexe" type="col"/>
+                <field name="poids" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    
+ <!-- Action pour ouvrir la vue de liste de reproduction -->
+      <record model="ir.actions.act_window" id="reproduction.action_window">
+          <field name="name">Liste des Animaux</field>
+          <field name="res_model">reproduction.vache</field>
+          <field name="view_mode">kanban,tree,form,graph</field>
+      </record>
+
+ 
+     
+      <!-- Éléments de menu -->
+      <menuitem name="Reproduction" id="reproduction.menu_root" action="reproduction.action_window"/>
+      <menuitem name="Tableau de bord" id="reproduction.menu_dashboard" parent="reproduction.menu_root" />
+      <menuitem name="Ferme" id="reproduction.menu_farm" parent="reproduction.menu_root" />
+      <menuitem name="Ressources" id="reproduction.menu_resources" parent="reproduction.menu_root"/>
+      <menuitem name="Périodes de Chaleur" id="reproduction.menu_heat_periods" parent="reproduction.menu_root"/>
+      <menuitem name="Inséminations" id="reproduction.menu_inseminations" parent="reproduction.menu_root"/>
+
+      <menuitem name="Configuration" id="reproduction.menu_configuration" parent="reproduction.menu_root"/>
+
+      <!-- Actions pour les éléments de menu -->
+      <menuitem name="Tableau de bord" id="reproduction.menu_dashboard_action" parent="reproduction.menu_dashboard" action="reproduction.action_window"/>
+      <menuitem name="ferme" id="reproduction.menu_ferm_list" parent="reproduction.menu_farm" action="reproduction.action_window"/>
+      <menuitem name="Animaux de la ferme" id="reproduction.menu_farm_animals_action" parent="reproduction.menu_resources" action="reproduction.action_window"/>
+      <menuitem name="vache/taureau" id="reproduction.menu_vaches" parent="reproduction.menu_configuration" action="reproduction.action_window"/>
+      <menuitem name="technicien agricole" id="reproduction.menu_technicien_agricole" parent="reproduction.menu_configuration" action="reproduction.action_window"/>
+      <menuitem name="Écurie" id="reproduction.menu_ecurie" parent="reproduction.menu_configuration" action="reproduction.action_window"/>
+      <menuitem name="Équipe" id="reproduction.menu_team_action" parent="reproduction.menu_resources" action="reproduction.technicien_action_window"/>
+      <menuitem name="Liste des écuries" id="reproduction.menu_écuries_liste" parent="reproduction.menu_resources" action="reproduction.ecurie_action_window"/>
+
+  
+  </data>
+</odoo>

@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- Vue formulaire pour la création de tâches -->
+        <record id="custom_task_form_view" model="ir.ui.view">
+            <field name="name">custom.task.form</field>
+            <field name="model">project.task</field>
+            <field name="arch" type="xml">
+                <form string="Tâche">
+                  
+                    
+                    <!-- Autres champs et fonctionnalités peuvent être ajoutés ici -->
+                </form>
+            </field>
+        </record>
+        <record id="action_open_task_form" model="ir.actions.act_window">
+            <field name="name">Créer une tâche</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+        <record id="action_open_task_kanban" model="ir.actions.act_window">
+            <field name="name">Créer une tâche</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree</field>
+            <field name="target">current</field>
+        </record>
+        <menuitem name="Ajouter une tache" id="production.tach" parent="production.config" action="action_open_task_form"/>
+        <menuitem name="Taches" id="production.taches" parent="production.dashbord" action="action_open_task_kanban"/>
+
+    </data>
+</odoo>

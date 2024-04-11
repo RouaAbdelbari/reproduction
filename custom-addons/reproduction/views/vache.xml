@@ -1,0 +1,125 @@
+<odoo>
+    <!-- Vue formulaire pour une nouvelle vache -->
+    <record id="view_reproduction_form" model="ir.ui.view">
+        <field name="name">Formulaire Vache</field>
+        <field name="model">reproduction.vache</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire Vache">
+                <header>
+                    <button  id="button_confirm" name="action_confirm"  string="Confirm" class="btn-primary" status="draft" type="object" confirm="Are you sure that you need to confirm?"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+            
+
+                    <div class="row">
+                        
+                        <div style="position: relative;">
+                            <field name="image" widget="image" class="oe_avatar" string="" style="position: absolute; top: 0; right: 0; width: 150px; height: 150px;"/>
+                        </div>
+                        <div style="position: relative;">
+                            <group class="oe_title">
+                                <h1>
+                                    <field name="reference" readonly="1" style="padding-left: 10px;"/>
+                                </h1>
+                            </group>
+                        </div>
+                        <group>
+                            <group>
+
+                                <field name="sexe"/>
+                                <field name="poids"/>
+                                <field name="race"/>
+                                <field name="couleur"/>
+                                <field name="date_naissance"/>
+                            </group>
+                            <group>
+                                <field name="mere_id"/>
+                                <field name="pere_id"/>
+                                <field name="statut_reproduction"/>
+                                <field name="active" invisible="1"/>
+                                <field name="date_achat"/>
+                                <field name="age_achat"/>
+
+
+
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Enregistrements de poids" name="enregistrements_poids">
+                                <field name="poids_ids" widget="one2many_list">
+                                    <tree>
+                                        <field name="date"/>
+                                        <field name="poids"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="date"/>
+                                            <field name="poids"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group>
+                                    <button name="action_add_poids" string="Ajouter Poids" type="object" class="btn-primary"/>
+                                </group>
+                            </page>
+                         
+                        
+                          
+                            
+                            <page string="Notes du Vétérinaire" name="Notes-Vétérinaire">
+                                <group>
+                                    <field name="ordonnance"/>      
+                                </group>
+                            </page>
+                            <page string="Autres infos" name="autres_infos">
+                                <field name="note"/>
+                                  
+                            </page>
+                            <page string="Quantité de lait" name="quantite_lait">
+                                <!-- Champ pour la quantité de lait -->
+                                <group>
+                                    <field name="quantite_lait" string="Quantité de lait (L)" help="Quantité en litres"/>
+                                </group>
+                            </page> 
+                            
+                        </notebook>
+                        
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_reproduction_search" model="ir.ui.view">
+        <field name="name">reproduction.reproduction.search</field>
+        <field name="model">reproduction.vache</field>
+        <field name="arch" type="xml">
+           <search string="vache">
+            <field name="poids"/>
+            <field name="race"/>
+            <field name="sexe"/>
+            <separator/>
+            <group expand="1" string="Group By">
+                <filter string="Sexe" name="sexe" context="{'group_by':'sexe'}"/>
+                <filter string="Race" name="race" context="{'group_by':'race'}"/>
+                <filter string="Statut_reproduction" name="statut_reproduction" context="{'group_by':'statut_reproduction'}"/>
+            </group>
+            <searchpanel>
+                <field name="sexe" string="Sexe" icon="fa-exchange"/>
+                <field name="statut_reproduction" string="Statut_reproduction" select="multi" enable_counters="1"/>
+            </searchpanel>
+           </search>
+        </field>
+    </record>
+   
+    <!-- Action pour ouvrir le formulaire d'une nouvelle vache -->
+    <record model="ir.actions.act_window" id="reproduction.action_new_vache">
+        <field name="res_model">reproduction.vache</field>
+        <field name="name">Taureau/Vache</field>
+        <field name="view_mode">form</field>
+    </record>
+   
+    <menuitem name="Ajouter" id="reproduction.menu_add_new_vache" parent="reproduction.menu_vaches" action="reproduction.action_new_vache"/>
+</odoo>

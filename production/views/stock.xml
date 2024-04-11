@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue Form pour le modèle NiveauStock -->
+        <record id="view_stock_level_form" model="ir.ui.view">
+            <field name="name">production.level.form</field>
+            <field name="model">production.level</field>
+            <field name="arch" type="xml">
+                <form string="Niveaux de stock">
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" status="draft" type="object" confirm="Are you sure that you need to confirm?"/>
+                        <button id="button_done" name="action_done" string="Mark AS Done" class="btn-primary" status="confirm" type="object" />
+                        <button id="button_draft" name="action_draft" string="Set To Draft" class="btn-primary" status="cancel" type="object" />
+                        <button id="button_cancel" name="action_cancel" string="cancel" status="draft,confirm,done" type="object"/>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>
+                    <sheet>
+                    
+                        <group>
+                            <field name="produit_reference"/>
+                            <field name="type_lait"/>
+                            <field name="quantite_en_stock"/>
+
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+           <!-- Action pour ouvrir le formulaire -->
+           <record id="menu_open_stock_form" model="ir.actions.act_window">
+            <field name="name">Ajouter</field>
+            <field name="res_model">production.level</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_stock_level_form"/>
+        </record>
+
+        <record id="view_stock_level_tree" model="ir.ui.view">
+            <field name="name">production.level.tree</field>
+            <field name="model">production.level</field>
+            <field name="arch" type="xml">
+                <tree string="Niveaux de stock">
+                    <field name="produit_reference"/>
+                    <field name="type_lait"/>
+                    <field name="quantite_en_stock"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_stock_graph" model="ir.ui.view">
+            <field name="name">production.level.graph</field>
+            <field name="model">production.level</field>
+            <field name="arch" type="xml">
+                <graph string="lait Graphe" sample="1">
+                    <field name="type_lait" type="row"/>
+                    <field name="quantite_en_stock" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="view_stock_pivot" model="ir.ui.view">
+            <field name="name">production.level.graph</field>
+            <field name="model">production.level</field>
+            <field name="arch" type="xml">
+                <pivot string="lait Graphe" sample="1">
+                    <field name="type_lait" type="row"/>
+                    <field name="quantite_en_stock" type="measure"/>
+                </pivot>
+            </field>
+        </record>    
+         <!-- Action pour la vue liste -->
+         <record id="action_stock_level" model="ir.actions.act_window">
+            <field name="name">Niveaux de stock</field>
+            <field name="res_model">production.level</field>
+            <field name="view_mode">graph,pivot,form,tree</field>
+        </record>
+        <!-- Menu pour l'action -->
+        <menuitem id="menu_stock_level" name="Niveaux de stock" parent="production.stocks" action="action_stock_level" sequence="10"/>
+     
+        <!-- Menu pour l'action -->
+        <menuitem id="menu_open_stock_form_menu" name="Ajouter au stock" parent="production.config" action="menu_open_stock_form" sequence="11"/>
+    </data>
+</odoo>

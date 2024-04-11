@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_mvt_form" model="ir.ui.view">
+            <field name="name">production_laitiere.mvt.form</field>
+            <field name="model">production_laitiere.mvt</field>
+            <field name="arch" type="xml">
+                <form string="Mouvement">
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" status="draft" type="object" confirm="Are you sure that you need to confirm?"/>
+                        <button id="button_done" name="action_done" string="Mark As Done" class="btn-primary" status="confirm" type="object" />
+                        <button id="button_draft" name="action_draft" string="Set To Draft" class="btn-primary" status="cancel" type="object" />
+                        <button id="button_cancel" name="action_cancel" string="Cancel" status="draft,confirm,done" type="object"/>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_compute_prix" icon="fa-usd">
+                                <field string="Sales" name="prix" widget="statinfo" />
+                            </button>
+                        </div>
+                        
+                        <group>
+                            <field name="reference"/>
+                            <field name="client_id"/>
+                            <field name="type_lait"/>
+                            <field name="quantite_saisie"/>
+                            <field name="date_mouvement"/>
+                            <field name="type_mouvement"/>
+                            <field name="methode_paiement"/>
+                            <field name="prix"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir le formulaire -->
+        <record id="action_stock_mvt" model="ir.actions.act_window">
+            <field name="name">Mouvements de stock</field>
+            <field name="res_model">production_laitiere.mvt</field> 
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Vue Liste pour le modèle NiveauStock -->
+        <record id="view_stock_mvt_tree" model="ir.ui.view">
+            <field name="name">production_laitiere.mvt.tree</field>
+            <field name="model">production_laitiere.mvt</field>
+            <field name="arch" type="xml">
+                <tree string="Mouvements">
+                    <field name="reference"/>
+                    <field name="type_lait"/>
+                    <field name="quantite_saisie"/>
+                    <field name="prix"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action pour la vue liste -->
+        <record id="action_stock_mvt_list" model="ir.actions.act_window">
+            <field name="name">Mouvements de stock</field>
+            <field name="res_model">production_laitiere.mvt</field>
+            <field name="view_mode">form,tree</field>
+        </record>
+
+        <!-- Menu pour l'action -->
+        <menuitem id="menu_mvt_stock" name="Mouvements de stock" parent="production_laitiere.stocks" action="action_stock_mvt" sequence="10"/>
+     
+        <!-- Menu pour l'action -->
+        <menuitem id="menu_open_mvt_form_menu" name="Ajouter au panier" parent="production_laitiere.config" action="action_stock_mvt_list" sequence="11"/>
+    </data>
+</odoo>

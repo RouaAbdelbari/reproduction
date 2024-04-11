@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+        <record id="view_farm_form" model="ir.ui.view">
+            <field name="name">Company</field>
+            <field name="model">company.form</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Company" duplicate="0">
+                    <sheet>    
+                      <field name="image" widget="image" class="oe_avatar"/>
+                      <div class="oe_title">
+                          <label for="nom"/>
+                          <h1>
+                              <field name="nom" placeholder="e.g. Ferme"/>
+                          </h1>
+                      </div>
+                      <notebook colspan="4">
+                        <page string="Informations générales" name="Informations_générales">
+                            <group>
+                                <group>
+                                    <label for="rue" string="Addresse"/>
+                                    <div class="o_addresse_format">
+                                        <field name="rue" placeholder="Rue..." class="o_address_rue"/>
+                                        <field name="rue2" placeholder="Rue 2..." class="o_address_rue"/>
+                                        <field name="ville" placeholder="Ville" class="o_addresse_ville"/>
+                                    </div>
+                                    <field name="vat"/>
+                                </group>
+                                <group>
+                                    <field name="responsable" class="o_force_ltr"/>
+                                    <field name="mobile" class="o_force_ltr"/>
+                                    <field name="email"/>
+                                    <field name="site_internet" string="Site_internet" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                                   
+                                </group>
+                                <group name="social_media"/>
+                            </group>
+                        </page>
+                       
+                    </notebook>
+                    </sheet>
+                   
+                   
+                </form>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="reproduction.menu_new_ferm">
+            <field name="res_model">company.form</field>
+            <field name="name">company</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="reproduction.menu_farm_kanban_view" model="ir.ui.view">
+            <field name="name">farm (Kanban)</field>
+            <field name="model">company.form</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record" style="text-align: center; font-size: medium;">
+                                <div class="oe_kanban_global_click">
+                                    <img t-att-src="kanban_image('company.form', 'image', record.id.raw_value)" style="height: 120px; float: left; width: 40%;"/>
+                                    <div  style="margin-left: 39%; margin-top: 5%;padding-botton: 5%; padding-left: 11px; width: 59%; text-align: center;">
+                                        <strong><field name="nom"/></strong>
+                                        <div><field name="email"/></div>
+                                        <div><field name="rue"/></div>
+                                        <div><field name="ville"/></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="reproduction.menu_farm_tree_view" model="ir.ui.view">
+            <field name="name">Farm Tree View</field>
+            <field name="model">company.form</field>
+            <field name="arch" type="xml">
+                <tree string="Farm Tree View">
+                    <!-- Définissez les colonnes à afficher dans la vue arborescente -->
+                    <field name="nom"/>
+                    <field name="email"/>
+                    <field name="rue"/>
+                    <field name="ville"/>
+                    <field name="vat"/>
+                    <field name="responsable"/>
+                    <field name="mobile"/>
+                </tree>
+            </field>
+        </record>
+        
+
+        <record model="ir.actions.act_window" id="reproduction.farm_action_window">
+            <field name="name">Informations de la ferme</field>
+            <field name="res_model">company.form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem name="ferm" id="reproduction.menu_ferm_list" parent="reproduction.menu_farm" action="reproduction.farm_action_window"/>
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Définition de la vue du formulaire -->
+        <record id="view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[@name='warning_tax']" position="before">
+                        <div class="alert alert-warning oe_edit_only" role="alert">
+                            A partner with the same <span class="o_vat_label">Tax ID</span> already exists, are you sure to create a new one?
+                        </div>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+        <!-- Action pour ouvrir le formulaire -->
+        <record id="action_open_client_form" model="ir.actions.act_window">
+            <field name="name">Ajouter un client</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">form</field> <!-- Seulement la vue formulaire -->
+            <field name="view_id" ref="view_partner_form_inherited"/> <!-- Référence à la vue formulaire -->
+            <field name="target">main</field>
+        </record>
+
+        <!-- Menu pour ouvrir le formulaire -->
+        <menuitem id="menu_open_client_form" name="Ajouter un client" parent="production.config" action="action_open_client_form" sequence="10"/>
+
+        <!-- Action pour ouvrir la liste des partenaires -->
+        <record id="action_open_partner_list" model="ir.actions.act_window">
+            <field name="name">Liste des clients</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,kanban</field> <!-- Définir les modes de vue -->
+            <field name="target">main</field>
+        </record>
+
+        <!-- Menu pour ouvrir la liste des clients -->
+        <menuitem id="menu_open_partner_list" name="Liste des clients" parent="production.ressources" action="action_open_partner_list" sequence="20"/>
+    </data>
+</odoo>

@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+        
+         <!-- Vue formulaire pour une nouvelle insémination -->
+         <record id="reproduction.inseminations_form_view" model="ir.ui.view">
+            <field name="name">insimu</field>
+            <field name="model">reproduction.insemination</field>
+            <field name="arch" type="xml">
+                <form string="Formulaire Insémination">
+                    <header>
+                        <button  id="button_confirm" name="action_confirm"  string="Confirm" class="btn-primary" status="draft" type="object" confirm="Are you sure that you need to confirm?"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                        <group>
+                            <field name="reference"/>
+                            <field name="cow_id"/>
+                            <field name="date"/>
+                            <field name="insemination_type"/>
+                            <field name="successful"/>
+                            <field name="montant" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir le formulaire d'une nouvelle insémination -->
+        <record model="ir.actions.act_window" id="reproduction.menu_new_insi">
+            <field name="name">Nouvelle Insémination</field>
+            <field name="res_model">reproduction.insemination</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <!-- Vue liste pour l'historique des inséminations -->
+        <record id="reproduction.menu_inseminations_history_view" model="ir.ui.view">
+            <field name="name">insimunation</field>
+            <field name="model">reproduction.insemination</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="reference" readonly="1"/>
+                    <field name="date"/>
+                    <field name="insemination_type"/>
+                    <field name="successful"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Vue calendrier pour l'historique des inséminations -->
+        <record id="reproduction.menu_inseminations_calendar_view" model="ir.ui.view">
+           <field name="name">insimunation_calendar</field>
+           <field name="model">reproduction.insemination</field>
+           <field name="arch" type="xml">
+            <calendar string="Historique d'Inséminations" date_start="date" color="reference" mode="month"  hide_time="True"  event_open_popup="True" form_view_id="reproduction.inseminations_form_view">
+            <field name="reference" invisible="1"/>
+            <field name="insemination_type" filters="1" invisible="1"/>
+            <field name="date"/>
+            </calendar>
+            </field>
+        </record>
+        
+        <!-- Action pour ouvrir la vue de liste des inséminations -->
+        <record model="ir.actions.act_window" id="reproduction.insemination_action_window">
+            <field name="name">Historique d'Inséminations</field>
+            <field name="res_model">reproduction.insemination</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Action pour ouvrir la vue calendrier des inséminations -->
+        <record model="ir.actions.act_window" id="reproduction.insemination_action_calendar">
+            <field name="name">Calendrier d'Inséminations</field>
+            <field name="res_model">reproduction.insemination</field>
+            <field name="view_mode">calendar,tree,form</field>
+        </record>
+
+        <!-- Menu pour afficher le calendrier des inséminations -->
+        <menuitem name="Calendrier d'Inséminations" id="reproduction.menu_inseminations_calendar" parent="reproduction.menu_inseminations" action="reproduction.insemination_action_calendar"/>
+
+    </data>
+</odoo>

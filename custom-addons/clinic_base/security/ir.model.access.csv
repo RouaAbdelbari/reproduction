@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+clinic_base.access_clinic_physician_degree,access_clinic_physician_degree,clinic_base.model_clinic_physician_degree,base.group_user,1,1,1,1
+clinic_base.access_clinic_physician_specialty,access_clinic_physician_specialty,clinic_base.model_clinic_physician_specialty,base.group_user,1,1,1,1
+clinic_base.access_clinic_physician,access_clinic_physician,clinic_base.model_clinic_physician,base.group_user,1,1,1,1
+
+
+
+
+
+

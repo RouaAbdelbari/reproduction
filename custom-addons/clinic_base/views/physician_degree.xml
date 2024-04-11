@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="clinic_physician_degree_form_view" model="ir.ui.view">
+            <field name="name">Physician Degree</field>
+            <field name="model">clinic.physician.degree</field>
+            <field name="arch" type="xml">
+                <form string="Physician Degree">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="MBBS"/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <record id="" model="ir.ui.view">
+            <field name="name">Physician Degree</field>
+            <field name="model">clinic.physician.degree</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="clinic_physician_degree_action_view" model="ir.actions.act_window">
+            <field name="name">Physician Degree</field>
+            <field name="res_model">clinic.physician.degree</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                 <p class="o_view_nocontent_smiling_face">
+                    No Record Found
+                </p>
+                <p>
+                    Click to add a Degree.
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

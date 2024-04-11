@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <!-- Définition de la vue pour le formulaire -->
+        <record id="view_heat_periods_form" model="ir.ui.view">
+            <field name="name">Heat Periods Form</field>
+            <field name="model">reproduction.period</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Heat Period">
+
+                    <group>
+                        <field name="reference"/>
+                        <field name="vache_id"/>
+                        <field name="start_date"/>
+                        <field name="temperature"/>
+
+                        
+                    </group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Définition de l'action pour ouvrir le formulaire d'ajout de période de chaleur -->
+        <record model="ir.actions.act_window" id="action_heat_periods_form">
+            <field name="name">Add Heat Period</field>
+            <field name="res_model">reproduction.period</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_heat_periods_form"/>
+            <field name="context">{"default_temperature": 0}</field>
+        </record>
+
+        <!-- Vue calendrier pour l'historique  -->
+        <record id="reproduction.menu_chaleur_calendar_view" model="ir.ui.view">
+            <field name="name">chaleur_calendar</field>
+            <field name="model">reproduction.period</field>
+            <field name="arch" type="xml">
+             <calendar string="Historique de chaleur" date_start="start_date" color="reference" mode="month"  hide_time="True"  event_open_popup="True" form_view_id="reproduction.inseminations_form_view">
+                <field name="reference" invisible="1"/>
+                <field name="vache_id" filters="1" invisible="1"/>
+                <field name="start_date"/>
+            </calendar>
+             </field>
+         </record>
+         <record id="reproduction.menu_inseminations_history_view" model="ir.ui.view">
+            <field name="name">Période de chaleur</field>
+            <field name="model">reproduction.period</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="reference" readonly="1"/>
+                    <field name="vache_id"/>
+                    <field name="start_date"/>
+                    <field name="temperature"/>
+                </tree>
+            </field>
+        </record>
+         <record model="ir.actions.act_window" id="reproduction.chaleur_action_calendar">
+            <field name="name">Calendrier d'Inséminations</field>
+            <field name="res_model">reproduction.period</field>
+            <field name="view_mode">calendar,tree,form,graph</field>
+        </record>
+         
+        <menuitem name="Ajouter une Période de Chaleur" id="reproduction.menu_heat_periods_add_form" parent="reproduction.menu_heat_periods" action="action_heat_periods_form"/>
+
+        <!-- Associer l'action au menu pour afficher l'historique des périodes de chaleur en mode graphe -->
+        <menuitem name="Historique de Périodes de Chaleur" id="reproduction.menu_heat_periods_history" parent="reproduction.menu_heat_periods" action="reproduction.chaleur_action_calendar"/>
+
+    </data>
+</odoo>

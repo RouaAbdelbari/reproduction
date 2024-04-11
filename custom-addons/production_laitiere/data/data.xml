@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">production Sequence</field>
+            <field name="code">production_laitiere</field>
+            <field name="prefix">PR</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">mvt Sequence</field>
+            <field name="code">mvt</field>
+            <field name="prefix">COM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">client Sequence</field>
+            <field name="code">client</field>
+            <field name="prefix">CLI</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+    </data>
+</odoo>

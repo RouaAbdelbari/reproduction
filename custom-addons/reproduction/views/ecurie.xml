@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+            <!-- Vue pour la liste des écuries en mode Kanban -->
+        <record id="reproduction.menu_écuries_kanban_view" model="ir.ui.view">
+            <field name="name">Écuries (Kanban)</field>
+            <field name="model">reproduction.ecurie</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record" style="text-align: center; font-size: medium;">
+                                <div class="oe_kanban_global_click">
+                                    <img t-att-src="kanban_image('reproduction.ecurie', 'image', record.id.raw_value)" style="height: 120px; float: left; width: 40%;"/>
+                                    <div  style="margin-left: 39%; margin-top: 5%;padding-botton: 5%; padding-left: 11px; width: 59%; text-align: center;">
+                                        <strong><field name="reference"/></strong>
+                                        <div><field name="capacite"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="reproduction.menu_écuries_tree_view" model="ir.ui.view">
+            <field name="name">Écuries (Arbre)</field>
+            <field name="model">reproduction.ecurie</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ecurie_id"/>
+                    <field name="responsable_id"/>
+                    <field name="capacite"/>
+                    <field name="image"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="reproduction.menu_ecurie_pivot_view" model="ir.ui.view">
+            <field name="name">reproduction.ecurie.pivot</field>
+            <field name="model">reproduction.ecurie</field>
+            <field name="arch" type="xml">
+                <pivot string="technicien pivot">
+                    <field name="reference" type="col"/>
+                    <field name="categorie" type="row" />
+                </pivot>
+            </field>
+        </record>
+        <record id="reproduction.menu_technicien_graph_view" model="ir.ui.view">
+            <field name="name">reproduction.ecurie.graph</field>
+            <field name="model">reproduction.ecurie</field>
+            <field name="arch" type="xml">
+                <graph string="Ecurie Graphe" sample="1">
+                    <field name="categorie" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir la vue de liste des écuries -->
+        <record model="ir.actions.act_window" id="reproduction.ecurie_action_window">
+            <field name="name">Liste des écuries</field>
+            <field name="res_model">reproduction.ecurie</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
+        </record>
+
+        
+    </data>
+</odoo>

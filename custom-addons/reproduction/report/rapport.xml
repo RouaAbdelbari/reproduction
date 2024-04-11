@@ -1,0 +1,31 @@
+<odoo>
+  
+     <record id="report_vache_card" model="ir.actions.report">
+         <field name="name">Rapport  détaillés</field>
+         <field name="model">reproduction.vache</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">reproduction.report_vache_id_detail</field>
+         <field name="report_file">reproduction.report_vache_id_detail</field>
+         <field name="binding_model_id" ref="model_reproduction_vache"/> 
+         <field name="binding_type">report</field>
+     </record>
+     <record id="report_technicien_card" model="ir.actions.report">
+         <field name="name">Rapport  technicien</field>
+         <field name="model">reproduction.technicien</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">reproduction.report_technicien_id_card</field>
+         <field name="report_file">reproduction.report_technicien_id_card</field>
+         <field name="binding_type">report</field>
+     </record>
+     <record id="report_insi_card" model="ir.actions.report">
+         <field name="name">Rapport insemination </field>
+         <field name="model">reproduction.insemination</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">reproduction.report_insi_id_card</field>
+         <field name="report_file">reproduction.report_insi_id_card</field>
+         <field name="binding_type">report</field>
+     </record>
+     
+     
+ 
+</odoo>

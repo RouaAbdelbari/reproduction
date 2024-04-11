@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue pour le formulaire d'enregistrement de production -->
+        <record id="view_production_form" model="ir.ui.view">
+            <field name="name">Formulaire d'enregistrement de production</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Ajouter les champs personnalisés à l'intérieur du notebook existant -->
+                    <xpath expr="//notebook" position="inside">
+                        <page string="Caractéristiques">
+                          
+                            <group>
+                                <group>
+                                    <field name="quantite"/>
+                                    <field name="date"/>
+
+                                </group>
+                                <group>
+                                    <field name="type_lait"/>
+                                    <field name="teneur_mat_grasse"/>
+                                    <field name="teneur_proteine"/>
+                                </group>
+                            </group>
+                            <!-- Ajoutez les champs manquants ici -->
+                            <group>
+                                <field name="vache_id"/>
+                                <field name="technicien_id"/>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+      
+        <!-- Ajouter une action pour ouvrir le formulaire -->
+        <record id="action_open_production_laitiere" model="ir.actions.act_window">
+            <field name="name">Enregistrement de production</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_production_form"/>
+            <field name="target">current</field>
+        </record>
+        
+
+        <!-- Ajouter une entrée de menu pour l'action -->
+        <menuitem id="menu_open_production_form" name="Ajouter une production" parent="production.config" action="action_open_production_laitiere"/>
+    </data>
+</odoo>

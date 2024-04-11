@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Reproduction Sequence</field>
+            <field name="code">reproduction.vache</field>
+            <field name="prefix">RE</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Ecurie Sequence</field>
+            <field name="code">reproduction.ecurie</field>
+            <field name="prefix">EC</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        
+        </record>
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Technicien Sequence</field>
+            <field name="code">reproduction.technicien</field>
+            <field name="prefix">TH</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Insemination Sequence</field>
+            <field name="code">reproduction.insemination</field>
+            <field name="prefix">IN</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Chaleur Sequence</field>
+            <field name="code">reproduction.period</field>
+            <field name="prefix">CH</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

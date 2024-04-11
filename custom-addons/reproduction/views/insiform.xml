@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <!-- Vue formulaire pour l'insémination -->
+        <record id="view_insemination_form" model="ir.ui.view">
+            <field name="name">Formulair Insémination</field>
+            <field name="model">reproduction.insemination</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Insémination">
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" status="draft" type="object" />
+                        
+                    </header>
+                    <group>
+                        <field name="reference"/>
+                        <field name="cow_id"/>
+                        <field name="date"/>
+                        <field name="insemination_type"/>
+                        <field name="active"/>
+                        <field name="montant"/>
+                        <field name="note"/>
+                    </group>
+                  
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue arborescente pour les inséminations -->
+        <record id="view_insemination_tree" model="ir.ui.view">
+            <field name="name">Vue Liste Inséminations</field>
+            <field name="model">reproduction.insemination</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Inséminations">
+                    <field name="reference"/>
+                    <field name="cow_id"/>
+                    <field name="date"/>
+                    <field name="insemination_type"/>
+                    <field name="montant"/>
+                    <field name="successful"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir le formulaire d'insémination -->
+        <record id="action_open_insemination_form" model="ir.actions.act_window">
+            <field name="name">Inséminations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">reproduction.insemination</field>
+            <field name="view_mode">form,tree</field>
+        </record>
+
+        <!-- Menu pour accéder aux inséminations -->
+        <menuitem name="Nouvelle Insémination" id="reproduction.menu_new_insemination" parent="reproduction.menu_inseminations" action="action_open_insemination_form"/>
+    </data>
+</odoo>

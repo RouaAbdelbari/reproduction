@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">production Sequence</field>
+            <field name="code">product.template</field>
+            <field name="prefix">REF</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">Planning Sequence</field>
+            <field name="code">production.planning</field>
+            <field name="prefix">PL</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        
+        </record>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">Stock Sequence</field>
+            <field name="code">production.level</field>
+            <field name="prefix">ST</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_production" model="ir.sequence">
+            <field name="name">Insemination Sequence</field>
+            <field name="code">production.mvt</field>
+            <field name="prefix">COM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_reproduction" model="ir.sequence">
+            <field name="name">Chaleur Sequence</field>
+            <field name="code">reproduction.period</field>
+            <field name="prefix">CH</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

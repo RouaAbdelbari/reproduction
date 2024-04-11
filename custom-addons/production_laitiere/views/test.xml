@@ -1,0 +1,230 @@
+
+<form string="Product" name="Product Template">
+  
+    <sheet name="product_form">
+        <field name="product_variant_count" invisible="1" field_id="product_variant_count_0"/>
+    <field name="service_type" widget="radio" invisible="True" field_id="service_type_0"/>
+    <field name="visible_expense_policy" invisible="1" field_id="visible_expense_policy_0"/>
+        <field name="is_product_variant" invisible="1" field_id="is_product_variant_0"/>
+        <field name="attribute_line_ids" invisible="1" on_change="1" field_id="attribute_line_ids_0"/>
+        <field name="type" invisible="1" on_change="1" field_id="type_0"/>
+        <field name="company_id" invisible="1" on_change="1" can_create="True" can_write="True" field_id="company_id_0"/>
+        <field name="fiscal_country_codes" invisible="1" field_id="fiscal_country_codes_0"/>
+        <div class="oe_button_box" name="button_box">
+            <button class="oe_stat_button" name="action_open_documents" type="object" icon="fa-file-text-o">
+                <field string="Documents" name="product_document_count" widget="statinfo" field_id="product_document_count_0"/>
+            </button>
+    <field name="tracking" invisible="1" on_change="1" field_id="tracking_0"/>
+                <field name="show_on_hand_qty_status_button" invisible="1" field_id="show_on_hand_qty_status_button_0"/>
+                <field name="show_forecasted_qty_status_button" invisible="1" field_id="show_forecasted_qty_status_button_0"/>
+                <button type="object" name="action_update_quantity_on_hand" invisible="not show_on_hand_qty_status_button" class="oe_stat_button" icon="fa-cubes">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field name="qty_available" nolabel="1" class="oe_inline" field_id="qty_available_0"/>
+                            <field name="uom_name" class="oe_inline" field_id="uom_name_0"/>
+                        </span>
+                        <span class="o_stat_text">On Hand</span>
+                    </div>
+                </button>
+                <button type="object" name="action_product_tmpl_forecast_report" invisible="not show_forecasted_qty_status_button" context="{'default_product_tmpl_id': id}" class="oe_stat_button" icon="fa-area-chart">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field name="virtual_available" nolabel="1" class="oe_inline" field_id="virtual_available_0"/>
+                            <field name="uom_name" class="oe_inline" field_id="uom_name_1"/>
+                        </span>
+                        <span class="o_stat_text">Forecasted</span>
+                    </div>
+                </button>
+                <button type="object" name="action_view_stock_move_lines" invisible="type not in ['product', 'consu']" class="oe_stat_button" icon="fa-exchange">
+                    <div class="d-flex flex-column">
+                        <div class="o_field_widget o_stat_info align-items-baseline flex-row gap-1 me-1">
+                            <span class="o_stat_text">In:</span>
+                            <span class="o_stat_value"><field name="nbr_moves_in" field_id="nbr_moves_in_0"/></span>
+                        </div>
+                        <div class="o_field_widget o_stat_info align-items-baseline flex-row gap-1 me-1">
+                            <span class="o_stat_text">Out:</span>
+                            <span class="o_stat_value"><field name="nbr_moves_out" field_id="nbr_moves_out_0"/></span>
+                        </div>
+                    </div>
+                </button>
+                <button type="object" name="action_view_orderpoints" invisible="type != 'product' or nbr_reordering_rules != 1" class="oe_stat_button" icon="fa-refresh">
+                    <div class="d-flex flex-column">
+                        <div class="o_field_widget o_stat_info align-items-baseline flex-row gap-1 me-1">
+                            <span class="o_stat_text">Min:</span>
+                            <span class="o_stat_value"><field name="reordering_min_qty" field_id="reordering_min_qty_0"/></span>
+                        </div>
+                        <div class="o_field_widget o_stat_info align-items-baseline flex-row gap-1 me-1">
+                            <span class="o_stat_text">Max:</span>
+                            <span class="o_stat_value"><field name="reordering_max_qty" field_id="reordering_max_qty_0"/></span>
+                        </div>
+                    </div>
+                </button>
+                <button type="object" name="action_view_orderpoints" invisible="type != 'product' or nbr_reordering_rules == 1" class="oe_stat_button" icon="fa-refresh">
+                    <field name="nbr_reordering_rules" widget="statinfo" field_id="nbr_reordering_rules_0"/>
+                </button>
+                <button class="oe_stat_button" name="action_view_sales" type="object" icon="fa-signal" help="Sold in the last 365 days" invisible="not sale_ok">
+        <div class="o_field_widget o_stat_info">
+            <span class="o_stat_value d-flex gap-1">
+                <field name="sales_count" widget="statinfo" nolabel="1" class="oe_inline" field_id="sales_count_0"/>
+                <field name="uom_name" class="oe_inline" field_id="uom_name_2"/>
+            </span>
+            <span class="o_stat_text">Sold</span>
+        </div>
+    </button>
+        </div>
+        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active" widget_id="widget_1"/>
+        <field name="id" invisible="True" field_id="id_0"/>
+        <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}" field_id="image_1920_0"/>
+        <div class="oe_title">
+            <label for="name" string="Product Name"/>
+            <h1>
+                <div class="d-flex">
+                    <field name="priority" widget="priority" class="me-3" field_id="priority_0"/>
+                    <field class="text-break" name="name" options="{'line_breaks': False}" widget="text" placeholder="e.g. Cheese Burger" on_change="1" field_id="name_0"/>
+                </div>
+            </h1>
+        </div>
+        <div name="options">
+            <span class="d-inline-block">
+                <field name="sale_ok" on_change="1" field_id="sale_ok_0"/>
+                <label for="sale_ok"/>
+            </span>
+            <span class="d-inline-block">
+                <field name="purchase_ok" field_id="purchase_ok_0"/>
+                <label for="purchase_ok"/>
+            </span>
+        </div>
+        <notebook>
+            <page string="General Information" name="general_information">
+                <group>
+                    <group name="group_general">
+                        <field name="active" invisible="1" field_id="active_0"/>
+                        <field name="detailed_type" on_change="1" field_id="detailed_type_0"/>
+    <field name="invoice_policy" required="1" field_id="invoice_policy_0"/>
+    <field name="expense_policy" widget="radio" invisible="not visible_expense_policy" field_id="expense_policy_0"/>
+                        <field name="product_tooltip" string="" class="fst-italic text-muted" invisible="type == 'service' and not sale_ok" field_id="product_tooltip_0"/>
+    <label for="product_tooltip" string="" invisible="type not in ('product', 'consu') or invoice_policy != 'order'"/>
+    <div invisible="type not in ('product', 'consu') or invoice_policy != 'order'" class="fst-italic text-muted">
+        You can invoice them before they are delivered.
+    </div>
+    <label for="product_tooltip" string="" invisible="type not in ('product', 'consu') or invoice_policy != 'delivery'"/>
+    <div invisible="type not in ('product', 'consu') or invoice_policy != 'delivery'" class="fst-italic text-muted">
+        Invoice after delivery, based on quantities delivered, not ordered.
+    </div>
+                        </group>
+                    <group name="group_standard_price">
+                        <label for="list_price"/>
+                        <div name="pricing" class="o_row">
+                          <field name="list_price" class="oe_inline" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}" on_change="1" field_id="list_price_0"/>
+        <span class="ms-2"/><field name="tax_string" field_id="tax_string_0"/>
+                        </div>
+        <field name="taxes_id" widget="many2many_tags" context="{'default_type_tax_use':'sale', 'search_default_sale': 1, 'search_default_service': type == 'service', 'search_default_goods': type == 'consu'}" invisible="detailed_type == &quot;combo&quot;" on_change="1" can_create="True" can_write="True" field_id="taxes_id_0"/>
+                        <label for="standard_price" invisible="product_variant_count &gt; 1 and not is_product_variant"/>
+                        <div name="standard_price_uom" invisible="product_variant_count &gt; 1 and not is_product_variant">
+                            <field name="standard_price" class="oe_inline" widget="monetary" options="{'currency_field': 'cost_currency_id', 'field_digits': True}" field_id="standard_price_0"/>
+                            </div>
+                        <field name="categ_id" string="Product Category" on_change="1" can_create="True" can_write="True" field_id="categ_id_0"/>
+    <field name="default_code" invisible="product_variant_count &gt; 1" on_change="1" field_id="default_code_0"/>
+    <field name="valid_product_template_attribute_line_ids" invisible="1" field_id="valid_product_template_attribute_line_ids_0"/>
+    <field name="barcode" invisible="product_variant_count &gt; 1 or (product_variant_count == 0 and valid_product_template_attribute_line_ids)" field_id="barcode_0"/>
+                        <field name="product_tag_ids" widget="many2many_tags" context="{'product_template_id': id}" can_create="True" can_write="True" field_id="product_tag_ids_0"/>
+                        <button name="213" icon="oi-arrow-right" type="action" class="btn-link ps-0" colspan="2" string="Configure tags"/>
+                        <field name="currency_id" invisible="1" field_id="currency_id_0"/>
+                        <field name="cost_currency_id" invisible="1" field_id="cost_currency_id_0"/>
+                        <field name="product_variant_id" invisible="1" field_id="product_variant_id_0"/>
+                    </group>
+    <field name="product_properties" columns="2" field_id="product_properties_0"/>
+                </group>
+                <group string="Internal Notes">
+                    <field colspan="2" name="description" nolabel="1" placeholder="This note is only for internal purposes." field_id="description_0"/>
+                </group>
+            </page>
+    <page name="combos" string="Combo Choices" invisible="not detailed_type == 'combo'">
+        <field name="combo_ids" widget="one2many" can_create="True" can_write="True" field_id="combo_ids_0">
+            <tree string="combos">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="base_price"/>
+                <field name="num_of_products"/>
+            </tree>
+        </field>
+    </page>
+            <page string="Sales" name="sales" invisible="not sale_ok">
+                <group name="sale">
+                    <group string="Upsell &amp; Cross-Sell" name="upsell" invisible="0">
+    <field name="optional_product_ids" widget="many2many_tags" options="{'color_field': 'color'}" domain="[('id', '!=', id), '|', ('company_id', '=', company_id), ('company_id', '=', False)]" placeholder="Recommend when 'Adding to Cart' or quotation" can_create="True" can_write="True" field_id="optional_product_ids_0"/></group>
+    <group string="Product Description for Self Order" name="description_self_order">
+        <field name="description_self_order" placeholder="Information about your product for Self Order and Kiosk" nolabel="1" colspan="2" field_id="description_self_order_0"/>
+    </group>
+    <group name="pos" string="Point of Sale" invisible="not sale_ok">
+        <field name="available_in_pos" on_change="1" field_id="available_in_pos_0"/>
+        <field name="to_weight" invisible="not available_in_pos" field_id="to_weight_0"/>
+        <field name="pos_categ_ids" widget="many2many_tags" invisible="not available_in_pos" string="Category" can_create="True" can_write="True" field_id="pos_categ_ids_0"/>
+    <field name="self_order_available" invisible="not available_in_pos" field_id="self_order_available_0"/>
+    </group>
+                </group>
+                <group>
+                    <group string="Sales Description" name="description">
+                        <field colspan="2" name="description_sale" nolabel="1" placeholder="This note is added to sales orders and invoices." field_id="description_sale_0"/>
+                    </group>
+    </group>
+            </page>
+            <page string="Purchase" name="purchase" invisible="not purchase_ok or detailed_type == 'combo'">
+                <group name="purchase">
+                    <group string="Vendor Bills" name="bill">
+        <field name="supplier_taxes_id" widget="many2many_tags" context="{'default_type_tax_use':'purchase', 'search_default_purchase': 1, 'search_default_service': type == 'service', 'search_default_goods': type == 'consu'}" can_create="True" can_write="True" field_id="supplier_taxes_id_0"/></group>
+                </group>
+            </page>
+            <page string="Inventory" name="inventory" invisible="type in ['combo', 'service']">
+                <group name="inventory">
+        <field name="has_available_route_ids" invisible="1" field_id="has_available_route_ids_0"/>
+        <group string="Operations" name="operations">
+            <label for="route_ids" invisible="type == 'service'"/>
+            <div>
+                <field name="route_ids" class="mb-0" widget="many2many_checkboxes" invisible="not has_available_route_ids or type == 'service'" can_create="True" can_write="True" field_id="route_ids_0"/>
+                <button id="stock.view_diagram_button" string="View Diagram" type="action" name="388" icon="oi-arrow-right" invisible="type not in ['product', 'consu']" class="btn btn-link pt-0" context="{'default_product_tmpl_id': id}"/>
+            </div>
+            <field name="route_from_categ_ids" widget="many2many_tags" invisible="not route_from_categ_ids" field_id="route_from_categ_ids_0"/>
+        </group>
+                    <group name="group_lots_and_weight" string="Logistics" invisible="type not in ['product', 'consu']">
+            <field name="responsible_id" domain="[('share', '=', False)]" widget="many2one_avatar_user" can_create="True" can_write="True" field_id="responsible_id_0"/>
+                        <label for="weight" invisible="product_variant_count &gt; 1 and not is_product_variant"/>
+                        <div class="o_row" name="weight" invisible="product_variant_count &gt; 1 and not is_product_variant">
+                            <field name="weight" class="oe_inline" field_id="weight_0"/>
+                            <field name="weight_uom_name" field_id="weight_uom_name_0"/>
+                        </div>
+                        <label for="volume" invisible="product_variant_count &gt; 1 and not is_product_variant"/>
+                        <div class="o_row" name="volume" invisible="product_variant_count &gt; 1 and not is_product_variant">
+                            <field name="volume" string="Volume" class="oe_inline" field_id="volume_0"/>
+                            <field name="volume_uom_name" field_id="volume_uom_name_0"/>
+                        </div>
+        <label for="sale_delay" invisible="not sale_ok"/>
+        <div invisible="not sale_ok">
+            <field name="sale_delay" class="oe_inline" style="vertical-align:baseline" field_id="sale_delay_0"/> days
+        </div>
+                    </group>
+        <group string="Counterpart Locations" name="stock_property">
+            <field name="property_stock_production" can_create="True" can_write="True" field_id="property_stock_production_0"/>
+            <field name="property_stock_inventory" can_create="True" can_write="True" field_id="property_stock_inventory_0"/>
+        </group>
+                </group>
+                <group>
+            <group string="Description for Receipts">
+                <field name="description_pickingin" colspan="2" nolabel="1" placeholder="This note is added to receipt orders (e.g. where to store the product in the warehouse)." field_id="description_pickingin_0"/>
+            </group>
+            <group string="Description for Delivery Orders">
+                <field name="description_pickingout" colspan="2" nolabel="1" placeholder="This note is added to delivery orders." field_id="description_pickingout_0"/>
+            </group>
+            </group>
+            </page>
+        <page string="Accounting" name="invoicing">
+            <group name="accounting"/>
+        </page>
+        </notebook>
+    </sheet>
+    <div class="oe_chatter">
+        <field name="message_follower_ids"/>
+        <field name="activity_ids"/>
+        <field name="message_ids"/>
+    </div>
+</form>

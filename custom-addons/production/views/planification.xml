@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Déclaration du modèle -->
+        <record id="view_planification_production_form" model="ir.ui.view">
+            <field name="name">Planification de Production Form View</field>
+            <field name="model">production.planning</field>
+            <field name="arch" type="xml">
+                <form string="Planification de la production">
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" status="draft" type="object" confirm="Are you sure that you need to confirm?"/>
+                    </header>
+                    <sheet>
+                        <div class="row">                    
+                         
+                                <group>
+                                    <field name="technicien_id"/>
+                                    <field name="vache_id"/>
+                                    <field name="date_planifiee"/>
+                                </group>
+                            <notebook>
+                              <page string="Notes" name="Notes">
+                                <group>
+                                    <field name="note"/>      
+                                </group>
+                              </page>
+                            </notebook>                      
+                        </div>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Déclaration de l'action pour afficher le formulaire -->
+        <record id="action_view_planification_production" model="ir.actions.act_window">
+            <field name="name">Planification de Production</field>
+            <field name="res_model">production.planning</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_planification_production_form"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Vous n'avez encore créé aucune planification de production.
+                    <br/> Cliquez sur Créer pour en ajouter une.
+                </p>
+            </field>
+        </record>
+
+        <!-- Déclaration du menu -->
+        <menuitem id="menu_add_plane" name="Ajouter une planification" parent="production.config" action="action_view_planification_production"/>
+
+    </data>
+</odoo>
